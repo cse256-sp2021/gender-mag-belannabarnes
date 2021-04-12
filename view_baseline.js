@@ -32,7 +32,7 @@ perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">Object Name: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">For special permissions or advanced settings, click Advanced.</div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">For special permissions (such as deleting) or advanced settings, click Advanced.</div>')
 
 // Make the (grouped) permission checkboxes table:
 grouped_permissions = define_grouped_permission_checkboxes('permdialog_grouped_permissions')
@@ -263,6 +263,16 @@ function open_advanced_dialog(file_path) {
 
     // open dialog:
     $(`#advdialog`).dialog('open')
+
+    //*************************************************Edited Text****************************************************
+    $(`#adv_perm_edit`).text('Edit Special Permissions')
+    $(`#adv_perm_inheritance_label`).text("Include inheritable permissions from this object's parent. When checked, the parent object's permissions will be assigned to this object (See current object name above).")
+    $(`#adv_perm_replace_child_permissions_label`).text("Replace all child object permissions with inheritable permissions from this object. When checked, all child objects will be assigned any inheritable permissions from the current object (See current object name above).")
+    $(`#perm_entry_change_user`).text('Change User')
+    $(`#adv_effective_tab_elem`).text('Effective Special Permissions')
+    $(`#adv_permissions_tab_elem`).text('Permissions Overview')
+    $(`#adv_owner_tab_elem`).text('Owner Overview')
+    $(`#adv_effective_user_select`).text('Select User')
 }
 
 // Update Effective User display
@@ -353,10 +363,10 @@ $('#adv_perm_inheritance').change(function(){
     else {
         // has just been turned off - pop up dialog with add/remove/cancel
         $(`<div id="add_remove_cancel" title="Security">
-            Warning: if you proceed, inheritable permissions will no longer propagate to this object.<br/>
-            - Click Add to convert and add inherited parent permissions as explicit permissions on this object<br/>
-            - Click Remove to remove inherited parent permissions from this object<br/>
-            - Click Cancel if you do not want to modify inheritance settings at this time.<br/>
+            <b><i>Warning:</i></b> if you proceed, inheritable permissions will no longer propagate to this object.<br/>
+            - Click <b>Convert to Explicit</b> to convert and add inherited parent permissions (grey) as explicit permissions (blue) on this object<br/>
+            - Click <b>Remove Inherited Permissions</b> to remove all inherited parent permissions from this object<br/>
+            - Click <b>Cancel</b> if you do not want to modify inheritance settings at this time.<br/>
         </div>`).dialog({ // TODO: don't create this dialog on the fly
             modal: true,
             width: 400,
@@ -364,7 +374,7 @@ $('#adv_perm_inheritance').change(function(){
             position: { my: "top", at: "top", of: $('#html-loc') },
             buttons: {
                 Add: {
-                    text: "Add",
+                    text: "Convert to Explicit",
                     id: "adv-inheritance-add-button",
                     click: function() {
                         let filepath = $('#advdialog').attr('filepath')
@@ -376,7 +386,7 @@ $('#adv_perm_inheritance').change(function(){
                     },
                 },
                 Remove: {
-                    text: "Remove",
+                    text: "Remove Inherited Permissions",
                     id: "adv-inheritance-remove-button",
                     click: function() {
                         let filepath = $('#advdialog').attr('filepath')
@@ -409,7 +419,7 @@ $('#adv_perm_replace_child_permissions').change(function(){
         let filepath = $('#advdialog').attr('filepath')
         let file_obj = path_to_file[filepath]
         $(`<div id="replace_perm_dialog" title="Security">
-            This will replace explicitly defined permissions on all descendants of this object with inheritable permissions from ${file_obj.filename}.<br/>
+            This will replace explicitly defined (blue) permissions on all descendants of this object with inheritable permissions from <b> ${file_obj.filename} </b>.<br/>
             Do you wish to continue?
         </div>`).dialog({
             modal: true,

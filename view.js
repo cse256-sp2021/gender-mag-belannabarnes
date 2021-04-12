@@ -1,24 +1,24 @@
 // ---- Define your dialogs  and panels here ----
-let effectivePermPanel = define_new_effective_permissions("permId", true);
-$('#sidepanel').append(effectivePermPanel);
-let userSelectField = define_new_user_select_field();
-$('#sidepanel').append(userSelectField);
+// let effectivePermPanel = define_new_effective_permissions("permId", true);
+// $('#sidepanel').append(effectivePermPanel);
+// let userSelectField = define_new_user_select_field();
+// $('#sidepanel').append(userSelectField);
 
-let dialog = define_new_dialog();
-$('#sidepanel').append(dialog);
-$('.perm_info').click(function(){
-    // console.log('clicked');
-    console.log($('#permId').attr('filepath'));
-    let fileObject = path_to_file[$('#permId').attr('filepath')];
-    console.log($('#permId').attr('username'));
-    let userObject = all_users[$('#permId').attr('username')];
-    let check = allow_user_action(fileObject, userObject, $(this).attr('permission_name'), true);
-    let explanationText = get_explanation_text(check);
-    console.log($(this));
-    dialog.text(explanationText);
-})
+// let dialog = define_new_dialog();
+// $('#sidepanel').append(dialog);
+// $('.perm_info').click(function(){
+//     // console.log('clicked');
+//     console.log($('#permId').attr('filepath'));
+//     let fileObject = path_to_file[$('#permId').attr('filepath')];
+//     console.log($('#permId').attr('username'));
+//     let userObject = all_users[$('#permId').attr('username')];
+//     let check = allow_user_action(fileObject, userObject, $(this).attr('permission_name'), true);
+//     let explanationText = get_explanation_text(check);
+//     console.log($(this));
+//     dialog.text(explanationText);
+// })
 
-$('#permId').attr('filepath', '/C/presentation_documents/important_file.txt');
+// $('#permId').attr('filepath', '/C/presentation_documents/important_file.txt');
 // ---- Display file structure ----
 
 // (recursively) makes and returns an html element (wrapped in a jquery object) for a given file object
