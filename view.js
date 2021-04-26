@@ -1,7 +1,38 @@
 // ---- Define your dialogs  and panels here ----
-// let effectivePermPanel = define_new_effective_permissions("permId", true);
+let effectivePermPanel = define_new_effective_permissions("permId", true);;
+let welcome = document.createElement("h1");
+welcome.innerText = "Welcome! This is a File Permissions interface.";
+let intro = document.createElement("h2");
+intro.innerText="Here's some things you should know: ";
+introList1 = document.createElement("li");
+introList1.innerText="Your goal is to give a user(s) the certain permissions for the certain file/folder listed in the mTurk banner below in 3 minutes or less.";
+introList2 = document.createElement("li");
+introList2.innerText="The folders/files are to your left.";
+introList3 = document.createElement("li");
+introList3.innerText="If a folder is not mentioned/hinted at in the instructions, chances are you will not need to open it.";
+$('#sidepanel').append(welcome);
+$('#sidepanel').append(intro);
+$('#sidepanel').append(introList1);
+$('#sidepanel').append(introList2);
+$('#sidepanel').append(introList3);
+
+let distinction = document.createElement("h4");
+distinction.innerText = "Note: Grey boxes are inherited permissions and are NOT clickable. Blue boxes are explicit and are clickable. Blank boxes are also clickable.";
+let disclaimer = document.createElement("h4");
+disclaimer.innerText="**Clicking Deny overrides Allow.**";
+$('#perm_add_user_line').append(distinction);
+$('#perm_add_user_line').append(disclaimer);
+let permDirection = document.createElement("h4");
+permDirection.innerText="Select a user below to see their permissions.";
+$('#permdialog_objname').append(permDirection);
+$(`#permdialog_grouped_permissions_Modify_name`).text('Modify (will also select Write)')
+$(`#permdialog_grouped_permissions_Read_Execute_name`).text('Read_Execute (will also select Read)')
+$(`#permdialog_grouped_permissions_Full_control_name`).text('Full_Control (will also select all of the above)')
+
+
+
 // $('#sidepanel').append(effectivePermPanel);
-// let userSelectField = define_new_user_select_field();
+// let userSelectField = define_new_user_select_field("userSelectId", "Select User");
 // $('#sidepanel').append(userSelectField);
 
 // let dialog = define_new_dialog();

@@ -32,7 +32,7 @@ perm_dialog = define_new_dialog('permdialog', title='Permissions', options = {
 obj_name_div = $('<div id="permdialog_objname" class="section">Object Name: <span id="permdialog_objname_namespan"></span> </div>')
 
 //Make the div with the explanation about special permissions/advanced settings:
-advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">For special permissions (such as deleting) or advanced settings, click Advanced.</div>')
+advanced_expl_div = $('<div id="permdialog_advanced_explantion_text">For special permissions or advanced settings, click Advanced.</div>')
 
 // Make the (grouped) permission checkboxes table:
 grouped_permissions = define_grouped_permission_checkboxes('permdialog_grouped_permissions')
@@ -119,7 +119,7 @@ let are_you_sure_dialog = define_new_dialog('are_you_sure_dialog', "Are you sure
 are_you_sure_dialog.text('Do you want to remove permissions for this user?')
 
 // Make actual "remove" button:
-perm_remove_user_button  = $('<button id="perm_remove_user" class="ui-button ui-widget ui-corner-all">Remove Current User</button>')
+perm_remove_user_button  = $('<button id="perm_remove_user" class="ui-button ui-widget ui-corner-all">Remove Selected User</button>')
 perm_remove_user_button.click(function(){
     // Get the current user and filename we are working with:
     let selected_username = file_permission_users.attr('selected_item')
@@ -218,6 +218,7 @@ function open_permission_entry(file_path) {
 function open_advanced_dialog(file_path) {
     let file_obj = path_to_file[file_path]
 
+    $('#advtab_title_owner').remove();
     // set file path in UI:
     $('#adv_perm_filepath').text(file_path);
     $('#adv_owner_filepath').text(file_path);
@@ -273,6 +274,8 @@ function open_advanced_dialog(file_path) {
     $(`#adv_permissions_tab_elem`).text('Permissions Overview')
     $(`#adv_owner_tab_elem`).text('Owner Overview')
     $(`#adv_effective_user_select`).text('Select User')
+
+
 }
 
 // Update Effective User display
